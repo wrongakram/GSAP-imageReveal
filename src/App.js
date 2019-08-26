@@ -1,30 +1,43 @@
-import React, {useRef, useEffect} from 'react';
-import './App.css';
-import Mountain from './images/mountains.jpg'
-import {TweenLite, Power3} from 'gsap';
+import React, { useRef, useEffect } from "react";
+import "./App.scss";
+import People from "./images/people.webp";
+import { TimelineLite, Power2 } from "gsap";
 import CSSRulePlugin from "gsap/CSSRulePlugin";
 
-
-
 const App = () => {
-  let image = useRef(null)
-  let imageContainer = useRef(null)
+  let image = useRef(null);
+  let container = useRef(null);
   let imageReveal = CSSRulePlugin.getRule(".img-container:after");
 
+  let tl = new TimelineLite();
+
   useEffect(() => {
-    TweenLite.from(imageReveal, 1, {width: "700px", ease: Power3.easeOut})
-    TweenLite.from(image, 1, {scale: 1.3, delay: .3, ease: Power3.easeOut})
-  })
+    tl.to(container, 0, { css: { visibility: "visible" } });
+    tl.to(imageReveal, 1.4, { width: "0%", ease: Power2.easeInOut });
+    tl.from(image, 1.4, {
+      scale: 1.6,
+      ease: Power2.easeInOut,
+      delay: -1.4
+    });
+  });
 
   return (
-    <div className="container">
-      <div className="wrapper">
-        <div ref={el => {imageContainer = el}} className="img-container">
-          <img ref={el => {image = el} } src={Mountain} alt="idk" />
-        </div>
-     </div>
-    </div>
+    <section className="main">
+      <p>GSAP IMAGE REVEAL</p>
+      <div className="container" ref={el => (container = el)}>
+        <>
+          <div className="img-container">
+            <img
+              ref={el => {
+                image = el;
+              }}
+              src={People}
+            />
+          </div>
+        </>
+      </div>
+    </section>
   );
-}
+};
 
 export default App;

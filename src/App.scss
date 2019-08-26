@@ -1,0 +1,39 @@
+.main {
+  p {
+    position: absolute;
+    transform: rotate(-90deg);
+    top: 400px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Avenir";
+    letter-spacing: 10px;
+  }
+  .container {
+    width: 1440px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+  }
+}
+
+.img-container {
+  width: 1440px;
+  height: 960px;
+  position: relative;
+  overflow: hidden;
+  &:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    top: 0;
+    right: 0;
+  }
+  img {
+    width: 1440px;
+    margin: 0 auto;
+  }
+}
